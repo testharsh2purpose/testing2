@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(device => {
       console.log('Name:', device.name);
       console.log('ID:', device.id);
-      para.innertext = device.name + device.id
+      para.innerText = device.name + ' ' + device.id
       console.log('Supported Services:', device.uuids);
       console.log('Advertising Data:', device.adData);
       console.log('RSSI:', device.rssi);
