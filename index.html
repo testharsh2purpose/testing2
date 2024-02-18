@@ -8,10 +8,11 @@
 <body>
 <h1>Bluetooth Device Scanner</h1>
 <button id="scanButton">Scan for Devices</button>
+<p id="para"> </p>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const scanButton = document.getElementById('scanButton');
-  
+  const para = document.getElementById('para');
   scanButton.addEventListener('click', function() {
     navigator.bluetooth.requestDevice({
       acceptAllDevices: true,
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(device => {
       console.log('Name:', device.name);
       console.log('ID:', device.id);
+      para.innertext = device.name + device.id
       console.log('Supported Services:', device.uuids);
       console.log('Advertising Data:', device.adData);
       console.log('RSSI:', device.rssi);
