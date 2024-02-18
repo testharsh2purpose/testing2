@@ -3,12 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Bluetooth Test</title>
-<link rel="stylesheet" href="styles.css">
+<title>Bluetooth Device Scanner</title>
 </head>
 <body>
-<h1>Web Bluetooth Test</h1>
-<script src="webbluetooth.js"></script>
-<script src="script.js"></script>
+<h1>Bluetooth Device Scanner</h1>
+<button id="scanButton">Scan for Devices</button>
+<p id="para"></p>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const scanButton = document.getElementById('scanButton');
+  const para = document.getElementById('para');
+  
+  scanButton.addEventListener('click', function() {
+    navigator.bluetooth.requestDevice({
+      acceptAllDevices: true,
+    })
+    .then(device => {
+      console.log('Name:', device.name);
+      console.log('ID:', device.id);
+      para.innerText = device.name + '              ' + device.id
+      console.log('Supported Services:', device.uuids);
+      console.log('Advertising Data:', device.adData);
+      console.log('RSSI:', device.rssi);
+      console.log('GATT Server:', device.gatt);
+    })
+    .catch(error => {
+      console.error('Error scanning for Bluetooth devices:', error);
+    });
+  });
+});
+</script>
 </body>
 </html>
