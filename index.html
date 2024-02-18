@@ -11,25 +11,24 @@
 <p id="para"> </p>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const scanButton = document.getElementById('scanButton');
   const para = document.getElementById('para');
-  scanButton.addEventListener('click', function() {
-    navigator.bluetooth.requestDevice({
-      acceptAllDevices: true,
-    })
-    .then(device => {
-      console.log('Name:', device.name);
-      console.log('ID:', device.id);
-      para.innerText = device.name + ' ' + device.id
-      console.log('Supported Services:', device.uuids);
-      console.log('Advertising Data:', device.adData);
-      console.log('RSSI:', device.rssi);
-      console.log('GATT Server:', device.gatt);
-    })
-    .catch(error => {
-      console.error('Error scanning for Bluetooth devices:', error);
-    });
+const scanButton = document.getElementById('scanButton');
+
+scanButton.addEventListener('click', function() {
+  navigator.bluetooth.requestDevice({
+    acceptAllDevices: true,
+  })
+  .then(device => {
+    // Check if the device name is null
+    const displayName = 'machine';
+    console.log('Name:', displayName);
+    console.log('ID:', device.id);
+    para.innerText = displayName + ' ' + device.id; // Display custom device name
+  })
+  .catch(error => {
+    console.error('Error scanning for Bluetooth devices:', error);
   });
+});
 });
 </script>
 </body>
